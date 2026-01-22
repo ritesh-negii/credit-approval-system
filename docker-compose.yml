@@ -16,6 +16,20 @@ services:
       - db
       - redis
 
+  celery:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: celery -A config worker -l info
+    volumes:
+      - ./backend:/app/backend
+      - ./data:/app/data
+    env_file:
+      - .env
+    depends_on:
+      - web
+      - redis
+
   db:
     image: postgres:15
     environment:
