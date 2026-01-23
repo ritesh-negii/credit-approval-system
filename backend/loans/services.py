@@ -1,4 +1,6 @@
 from datetime import date
+import math
+
 from loans.models import Loan
 
 
@@ -18,3 +20,11 @@ def calculate_credit_score(customer):
             score -= 5
 
     return max(score, 0)
+
+
+def calculate_emi(principal, annual_rate, tenure):
+    r = annual_rate / (12 * 100)
+    return (principal * r * math.pow(1 + r, tenure)) / (
+        math.pow(1 + r, tenure) - 1
+    )
+
