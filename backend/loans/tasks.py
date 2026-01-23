@@ -11,7 +11,7 @@ def ingest_loans_from_excel():
         engine="openpyxl"
     )
 
-    # 🔥 clean column names
+    
     df.columns = df.columns.str.strip().str.lower()
 
     for _, row in df.iterrows():
